@@ -19,7 +19,6 @@ public class ScoringStrategyExecutor {
     @Resource
     private List<ScoringStrategy> scoringStrategyList;
 
-
     /**
      * 评分
      *
