@@ -6,10 +6,15 @@
     @submit="doSearch"
   >
     <a-form-item field="userName" label="用户名">
-      <a-input v-model="formSearchParams.userName" placeholder="请输入用户名" />
+      <a-input
+        allow-clear
+        v-model="formSearchParams.userName"
+        placeholder="请输入用户名"
+      />
     </a-form-item>
     <a-form-item field="userProfile" label="用户简介">
       <a-input
+        allow-clear
         v-model="formSearchParams.userProfile"
         placeholder="请输入用户简介"
       />
@@ -32,7 +37,13 @@
     @page-change="onPageChange"
   >
     <template #userAvatar="{ record }">
-      <a-image width="64" :src="record.userAvatar" />
+      <a-image width="64px" :src="record.userAvatar" />
+    </template>
+    <template #createTime="{ record }">
+      {{ dayjs(record.createTime).format("YYYY-MM-DD HH:mm:ss") }}
+    </template>
+    <template #updateTime="{ record }">
+      {{ dayjs(record.updateTime).format("YYYY-MM-DD HH:mm:ss") }}
     </template>
     <template #optional="{ record }">
       <a-space>
@@ -50,6 +61,7 @@ import {
 } from "@/api/userController";
 import API from "@/api";
 import message from "@arco-design/web-vue/es/message";
+import { dayjs } from "@arco-design/web-vue/es/_utils/date";
 
 const formSearchParams = ref<API.UserQueryRequest>({});
 
@@ -62,7 +74,6 @@ const initSearchParams = {
 const searchParams = ref<API.UserQueryRequest>({
   ...initSearchParams,
 });
-
 const dataList = ref<API.User[]>([]);
 const total = ref<number>(0);
 
@@ -95,7 +106,6 @@ const doSearch = () => {
  */
 const onPageChange = (page: number) => {
   searchParams.value = {
-    //将当前的 searchParams.value 对象的所有属性保留，然后仅更新 current 属性的值为新的 page，最后生成一个新对象
     ...searchParams.value,
     current: page,
   };
@@ -109,6 +119,7 @@ const doDelete = async (record: API.User) => {
   if (!record.id) {
     return;
   }
+
   const res = await deleteUserUsingPost({
     id: record.id,
   });
@@ -118,6 +129,7 @@ const doDelete = async (record: API.User) => {
     message.error("删除失败，" + res.data.message);
   }
 };
+
 /**
  * 监听 searchParams 变量，改变时触发数据的重新加载
  */
@@ -155,10 +167,12 @@ const columns = [
   {
     title: "创建时间",
     dataIndex: "createTime",
+    slotName: "createTime",
   },
   {
     title: "更新时间",
     dataIndex: "updateTime",
+    slotName: "updateTime",
   },
   {
     title: "操作",
