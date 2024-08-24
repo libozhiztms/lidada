@@ -34,6 +34,24 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.2.2</version>
         </dependency>
+<!--        &lt;!&ndash; https://github.com/apache/shardingsphere &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.shardingsphere</groupId>-->
+<!--            <artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>-->
+<!--            <version>5.2.0</version>-->
+<!--        </dependency>-->
+        <!-- https://github.com/redisson/redisson -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.21.0</version>
+        </dependency>
+        <!-- https://github.com/ben-manes/caffeine -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>2.9.2</version>
+        </dependency>
         <!-- https://open.bigmodel.cn/dev/api#sdk_install -->
         <dependency>
             <groupId>cn.bigmodel.openapi</groupId>
