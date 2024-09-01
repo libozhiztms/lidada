@@ -107,7 +107,7 @@ knife4j:
           - com.lilibozhi.lidada.controller
 # AI 配置
 ai:
-  apiKey:
+  apiKey:xxx
 
 
 
